@@ -1,0 +1,13 @@
+services:
+  singleton-db:
+    image: postgres:17
+    container_name: singleton-db
+    ports:
+      - "5333:5432"
+    environment:
+      - POSTGRES_USER=singleton
+      - POSTGRES_PASSWORD=singleton
+    volumes:
+      - singleton_db:/var/lib/postgresql/data
+volumes:
+  singleton_db:

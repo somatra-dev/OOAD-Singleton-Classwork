@@ -12,9 +12,9 @@ public class DatabaseResourceConfig {
     private static DatabaseResourceConfig instance;
     private Connection connection;
 
-    private static final String URL = "jdbc:postgresql://localhost:5222/db_a01_e1";
-    private static final String USERNAME = "jdbc";
-    private static final String PASSWORD = "123";
+    private static final String URL = "jdbc:postgresql://localhost:5333/singleton";
+    private static final String USERNAME = "singleton";
+    private static final String PASSWORD = "singleton";
 
     // Private constructor
     private DatabaseResourceConfig() {

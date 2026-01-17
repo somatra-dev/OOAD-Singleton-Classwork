@@ -1,33 +1,82 @@
 package co.pesexpo;
 
 import co.pesexpo.config.DatabaseResourceConfig;
+import co.pesexpo.dao.BookingDao;
+import co.pesexpo.dao.ProductDao;
+import co.pesexpo.dao.StudentDao;
+import co.pesexpo.dao.impl.BookDaoImpl;
+import co.pesexpo.dao.impl.ProductDaoImpl;
+import co.pesexpo.dao.impl.StudentDaoImpl;
+
 import java.sql.Connection;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        boolean running = true;
 
-        // Place 1: Get singleton instance
-        Connection conn1 = DatabaseResourceConfig.getInstance().getConnection();
-        System.out.println("Place 1: " + conn1);
+        while (running) {
+            System.out.println("\n===== MENU =====");
+            System.out.println("1. Book");
+            System.out.println("2. Student");
+            System.out.println("3. Product");
+            System.out.println("0. Exit");
+            System.out.print("Choose option: ");
 
-        // Place 2: Get singleton instance
-        Connection conn2 = DatabaseResourceConfig.getInstance().getConnection();
-        System.out.println("Place 2: " + conn2);
+            int choice = scanner.nextInt();
 
-        // Place 3: Get singleton instance
-        Connection conn3 = DatabaseResourceConfig.getInstance().getConnection();
-        System.out.println("Place 3: " + conn3);
+            switch (choice) {
+                case 1:
+                    handleBook();
+                    break;
+                case 2:
+                    handleStudent();
+                    break;
+                case 3:
+                    handleProduct();
+                    break;
+                case 0:
+                    running = false;
+                    System.out.println("Exiting application...");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
 
-        // Place 4: Get singleton instance
-        Connection conn4 = DatabaseResourceConfig.getInstance().getConnection();
-        System.out.println("Place 4: " + conn4);
+        scanner.close();
+    }
 
-        // Place 5: Get singleton instance
-        Connection conn5 = DatabaseResourceConfig.getInstance().getConnection();
-        System.out.println("Place 5: " + conn5);
+    private static void handleBook() {
+        System.out.println("📘 Book menu");
+        try {
+            BookingDao bookingDao = new BookDaoImpl();
+            bookingDao.findAll().forEach(System.out::println);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-        // All connections are the same object
-        System.out.println("\nAll same instance? " + (conn1 == conn2 && conn2 == conn3 && conn3 == conn4 && conn4 == conn5));
+    private static void handleStudent() {
+        System.out.println("🎓 Student menu");
+        try {
+            StudentDao studentDao = new StudentDaoImpl();
+            studentDao.findAll().forEach(System.out::println);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void handleProduct() {
+        System.out.println("🛒 Product menu");
+        try {
+            ProductDao productDao = new ProductDaoImpl();
+            productDao.findAll().forEach(System.out::println);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
+
