@@ -1,6 +1,5 @@
 package co.pesexpo;
 
-import co.pesexpo.config.DatabaseResourceConfig;
 import co.pesexpo.dao.BookingDao;
 import co.pesexpo.dao.ProductDao;
 import co.pesexpo.dao.StudentDao;
@@ -8,7 +7,6 @@ import co.pesexpo.dao.impl.BookDaoImpl;
 import co.pesexpo.dao.impl.ProductDaoImpl;
 import co.pesexpo.dao.impl.StudentDaoImpl;
 
-import java.sql.Connection;
 import java.util.Scanner;
 
 public class Main {
